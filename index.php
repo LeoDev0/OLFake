@@ -1,7 +1,5 @@
 <?php 
-session_start();
-require 'assets/templates/header.php';
-include 'config.php';
+require 'templates/header.php';
 
 ?>
 
@@ -25,4 +23,4 @@ include 'config.php';
 </div>
 
 
-<?php require 'assets/templates/footer.php'; ?>
+<?php require 'templates/footer.php'; ?>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $dbuser = "root";
 $dbpass = "";
 $dbname = "classificados";
