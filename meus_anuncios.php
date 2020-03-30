@@ -13,9 +13,9 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
 
 <div class="container" style="margin-top:50px;">
   <h1 style="margin-bottom:30px;">Meus Anúncios</h1>
-  <a style="margin-bottom:30px;" class="btn btn-primary" href="add_anuncio.php">Adicionar anúncio</a>
+  <a style="margin-bottom:30px;" class="btn btn-primary" href="add_anuncio.php">Novo anúncio</a>
 
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Foto</th>
@@ -27,14 +27,24 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
     <?php
     include 'classes/class.anuncios.php';
     $anuncios = new Anuncios($pdo);
-    // $anunciois = 
+    $anuncios = $anuncios->getMeusAnuncios();
+
     foreach ($anuncios as $anuncio):
     ?>
     <tr>
-      <td><img src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio"></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>
+        <?php if (empty($anuncio['url'])): ?>
+        <img height="80" src="assets/images/anuncios/default.jpg" alt="anuncio">
+        <?php else: ?>
+        <img height="100" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
+        <?php endif; ?>
+      </td>
+      <td><?= $anuncio['titulo']; ?></td>
+      <td>R$ <?= number_format($anuncio['valor'], 2) ?></td>
+      <td>
+        <a class="btn btn-outline-dark" href="editar_anuncio.php?id=<?= $anuncio['id']; ?>">Editar</a>
+        <a class="btn btn-outline-danger" href="deletar_anuncio.php?id=<?= $anuncio['id']; ?>">Excluir</a>
+      </td>
     </tr>
     <?php endforeach; ?>
 

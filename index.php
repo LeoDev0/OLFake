@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
 
 <div class="container-fluid">
 
-  <div class="jumbotron">
+  <div style="margin-top:20px;" class="jumbotron">
     <h2>O que deseja comprar<?= isset($_SESSION['user_id']) ? ", " . ucfirst($user['nome']): "";?>?</h2>
     <p>Vai lá, pesquisa aí</p>
     <input class="form-control form-control-lg" type="text" placeholder="Pesquisar produto" width="200">
