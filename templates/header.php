@@ -86,9 +86,9 @@ include 'classes/class.usuario.php';
 
             </form>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -160,9 +160,9 @@ include 'classes/class.usuario.php';
 
             </form>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

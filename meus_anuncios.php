@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   <a style="margin-bottom:30px;" class="btn btn-primary" href="add_anuncio.php">Novo anúncio</a>
 
   <table class="table table-hover">
-    <thead>
+    <thead class="thead thead-light">
       <tr>
         <th>Foto</th>
         <th>Título</th>

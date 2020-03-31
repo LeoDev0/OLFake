@@ -19,9 +19,7 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
   $estado = $_POST['estado'];
 
   $anuncio->addAnuncio($titulo, $categoria, $valor, $descricao, $estado);
-  echo "<center>";
-  echo '<div class="alert alert-success">Produto adicionado com sucesso!</div>';
-  echo "</center>";
+  echo '<div class="text-center alert alert-success">Produto adicionado com sucesso!</div>';
 }
 
 ?>
@@ -32,7 +30,7 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
   <form method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-      <label for="titulo">Título</label>
+      <label for="titulo">Título do anúncio</label>
       <input class="form-control" type="text" name="titulo">
     </div>
 
@@ -53,11 +51,11 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
 
     <div class="form-group">
       <label for="valor">Valor</label>
-      <input class="form-control" type="text" name="valor">
+      <input class="form-control" type="number" name="valor">
     </div>
 
     <div class="form-group">
-      <label for="descricao">Descrição</label>
+      <label for="descricao">Descrição do produto</label>
       <textarea class="form-control" type="text" name="descricao"></textarea>
     </div>
 
@@ -70,7 +68,7 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       </select>
     </div>
 
-    <button class="btn btn-primary">Adicionar</button>
+    <button class="btn btn-primary">Adicionar produto</button>
 
   </form>
   

@@ -2,10 +2,7 @@
 require 'config.php';
 require 'classes/class.anuncios.php';
 $id_anuncio = $_GET['id'];
-// $id_usuario = $_SESSION['user_id'];
 
-// echo "Id do usuário: $id_usuario" . '<br>';
-// echo "Id do anuncio: $id_anuncio";
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
   $id_usuario = $_SESSION['user_id'];
 
