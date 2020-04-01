@@ -19,7 +19,8 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
   $estado = $_POST['estado'];
 
   $anuncio->addAnuncio($titulo, $categoria, $valor, $descricao, $estado);
-  echo '<div class="text-center alert alert-success">Produto adicionado com sucesso!</div>';
+  $_SESSION['confirma_add'] = '<div class="text-center alert alert-success">Produto adicionado com sucesso!</div>';
+  header('Location: meus_anuncios.php');
 }
 
 ?>

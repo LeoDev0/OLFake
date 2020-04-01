@@ -85,8 +85,12 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
     </div>
 
     <div class="form-group">
-      <label for="fotos[]">Fotos do produto</label><br>
-      <input type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg">
+      <div class="custom-file" style="margin:30px 0 10px 0;">
+        <input class="custom-file-input" id="browse" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg" aria-describedby="inputGroupFileAddon01">
+        <label id="preview" class="custom-file-label" for="browse">Adicionar fotos</label>
+      </div>
+      <!-- <label for="fotos[]">Fotos do produto</label><br>
+      <input type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg"> -->
 
       <div class="card">
         <div class="card-header">Fotos</div>
@@ -94,7 +98,7 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
           <?php foreach ($info['fotos'] as $foto): ?>
             <div class="foto_item">
               <img src="assets/images/anuncios/<?= $foto['url'] ?>" class="img-thumbnail" alt="foto_produto"><br>
-              <a href="excluir_foto.php?id=<?= $foto['id'] ?>" class="btn btn-danger text-decoration-none"><i class="far fa-trash-alt"></i></a>
+              <a href="deletar_foto.php?id=<?= $foto['id'] ?>" class="btn btn-danger text-decoration-none"><i class="far fa-trash-alt"></i></a>
             </div>
           <?php endforeach; ?>
         </div>

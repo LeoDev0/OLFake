@@ -9,6 +9,13 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   // echo '<script> location.replace("index.php"); </script>';
   // echo '<script> window.location.href="index.php"; </script>';
 }
+
+// exibe mensagem de confirmação de criação de anúncio caso essa $_SESSION
+// tenha sido criada no arquivo 'add_anuncio.php'
+if (isset($_SESSION['confirma_add']) && !empty($_SESSION['confirma_add'])) {
+  echo $_SESSION['confirma_add'];
+  unset($_SESSION['confirma_add']);
+}
 ?>
 
 <div class="container" style="margin-top:50px;">

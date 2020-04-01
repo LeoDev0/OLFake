@@ -68,6 +68,8 @@ class Anuncios {
     $sql->bindValue(":id_anuncio", $id_anuncio);
     $sql->execute();
 
+    // Se vier alguma foto enviada pelo cliente, um redimensionamento
+    // dessa imagem será feita antes de subida para o servidor  
     if (count($fotos) > 0) {
       for ($i = 0; $i < count($fotos['tmp_name']); $i++) {
         $tipo = $fotos['type'][$i];
@@ -133,5 +135,29 @@ class Anuncios {
     } else {
       header('Location: meus_anuncios.php');
     }
+  }
+
+  public function deletarFoto($id_foto, $id_usuario) {
+    $id_anuncio = 0;
+
+    $sql = "SELECT id_anuncio, url FROM anuncios_imagens WHERE id = :id_foto";
+    $sql = $this->pdo->prepare($sql);
+    $sql->bindValue(":id_foto", $id_foto);
+    $sql->execute();
+
+    if ($sql->rowCount() > 0) {
+      $dados_foto = $sql->fetch();
+      $id_anuncio = $dados_foto['id_anuncio'];
+      $url = $dados_foto['url'];
+    }
+
+    $sql = "DELETE FROM anuncios_imagens WHERE id = :id_foto";
+    $sql = $this->pdo->prepare($sql);
+    $sql->bindValue(":id_foto", $id_foto);
+    $sql->execute();
+
+    unlink('assets/images/anuncios/' . $url);
+    return $id_anuncio;
+
   }
 }

@@ -25,7 +25,6 @@ class Usuario {
   }
 
   public function registrar($nome, $email, $senha) {
-    
     // primeiro é checado se o email já está cadastrado no banco de dados
     $sql = "SELECT id FROM usuarios WHERE email = :email";
     $sql = $this->pdo->prepare($sql);
