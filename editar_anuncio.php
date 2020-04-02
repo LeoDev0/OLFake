@@ -93,7 +93,7 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       <input type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg"> -->
 
       <div class="card">
-        <div class="card-header">Fotos</div>
+        <div class="card-header">Fotos do produto</div>
         <div class="card-body">
           <?php foreach ($info['fotos'] as $foto): ?>
             <div class="foto_item">

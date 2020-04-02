@@ -17,8 +17,13 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
   $valor = $_POST['valor'];
   $descricao = $_POST['descricao'];
   $estado = $_POST['estado'];
+  if (isset($_FILES['fotos'])) {
+    $fotos = $_FILES['fotos'];
+  } else {
+    $fotos = array();
+  }
 
-  $anuncio->addAnuncio($titulo, $categoria, $valor, $descricao, $estado);
+  $anuncio->addAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos);
   $_SESSION['confirma_add'] = '<div class="text-center alert alert-success">Produto adicionado com sucesso!</div>';
   header('Location: meus_anuncios.php');
 }
@@ -67,6 +72,13 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
         <option value="1">Bom</option>
         <option value="2">Ótimo</option>
       </select>
+    </div>
+
+    <div class="form-group">
+      <div class="custom-file" style="margin:30px 0 10px 0;">
+        <input class="custom-file-input" id="browse" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg" aria-describedby="inputGroupFileAddon01">
+        <label id="preview" class="custom-file-label" for="browse">Adicionar fotos do produto</label>
+      </div>
     </div>
 
     <button class="btn btn-primary">Adicionar produto</button>
