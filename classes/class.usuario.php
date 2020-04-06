@@ -8,6 +8,12 @@ class Usuario {
     $this->pdo = $pdo;
   }
 
+  public function getTotalUsuarios() {
+    $sql = "SELECT COUNT(*) AS total FROM usuarios";
+    $sql = $this->pdo->query($sql);
+    return $sql->fetch();
+  }
+
   public function fazerLogin($email, $senha) {
     $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha";
     $sql = $this->pdo->prepare($sql);

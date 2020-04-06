@@ -7,6 +7,29 @@ class Anuncios {
     $this->pdo = $pdo;
   }
 
+  public function getUltimosAnuncios($page, $limitePorPagina) {
+    $offset = ($page - 1) * $limitePorPagina;
+
+    $sql = "SELECT *, 
+      (select categorias.nome from categorias 
+      where anuncios.id_categoria = categorias.id)
+      as categoria,
+      (select anuncios_imagens.url from anuncios_imagens 
+      where anuncios_imagens.id_anuncio = anuncios.id limit 1)
+      as url FROM anuncios ORDER BY id DESC LIMIT $offset, $limitePorPagina";
+
+    $sql = $this->pdo->query($sql);
+    // $sql = $this->pdo->prepare($sql);
+    // $sql->execute();
+    return $sql->fetchAll(); 
+  }
+
+  public function getTotalAnuncios() {
+    $sql = "SELECT COUNT(*) AS total FROM anuncios";
+    $sql = $this->pdo->query($sql);
+    return $sql->fetch();
+  }
+
   public function getMeusAnuncios() {
     $array = array();
 
@@ -28,7 +51,13 @@ class Anuncios {
   }
 
   public function getAnuncio($id_anuncio, $id_usuario) {
-    $sql = "SELECT * FROM anuncios WHERE id = :id_anuncio AND id_usuario = :id_usuario";
+    // $sql = "SELECT * FROM anuncios WHERE id = :id_anuncio AND id_usuario = :id_usuario";
+    $sql = "SELECT *, 
+      (SELECT categorias.nome FROM categorias 
+      WHERE categorias.id = anuncios.id_categoria)
+      AS categoria FROM anuncios 
+      WHERE id = :id_anuncio AND id_usuario = :id_usuario";
+
     $sql = $this->pdo->prepare($sql);
     $sql->bindValue(":id_anuncio", $id_anuncio);
     $sql->bindValue(":id_usuario", $id_usuario);
