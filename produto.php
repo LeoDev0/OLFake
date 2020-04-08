@@ -1,12 +1,11 @@
 <?php
 require 'templates/header.php';
-require 'classes/class.anuncios.php';
+// require 'classes/class.anuncios.php';
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
   $id_anuncio = $_GET['id'];
   $anuncio = new Anuncios($pdo);
 
-  // $sql = "SELECT id_usuario FROM anuncios WHERE id = $id_anuncio";
   $sql = $pdo->query("SELECT id_usuario FROM anuncios WHERE id = $id_anuncio");
   if ($sql->rowCount() > 0) {
     $id_usuario = $sql->fetch()['id_usuario'];

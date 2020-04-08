@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 require 'classes/class.anuncios.php';
+
 $id_foto = $_GET['id'];
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {

@@ -3,7 +3,6 @@ ob_start();  // "output buffering" (buffer de saída) utilizado para evitar o er
              // "Cannot modify header information - headers already sent"
              // ao redirecionar a página com o método "header()".
 require 'templates/header.php';
-require 'classes/class.anuncios.php';
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']) 
    && isset($_GET['id']) && !empty($_GET['id'])) {
@@ -17,8 +16,6 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])
 }
 
 if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
-  $anuncio = new Anuncios($pdo);
-
   $titulo = $_POST['titulo'];
   $categoria = $_POST['categoria'];
   $valor = $_POST['valor'];
@@ -51,7 +48,6 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       <label for="categoria">Categoria</label>
       <select class="custom-select" name="categoria">
       <?php
-      require 'classes/class.categorias.php';
       $categorias = new Categorias($pdo);
       $categorias = $categorias->getLista();
 
@@ -106,11 +102,9 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
     </div>
 
     <button class="btn btn-primary">Salvar alterações</button>
-
   </form>
   
 </div>
-<script src="https://kit.fontawesome.com/cfd8b43b94.js"></script>
 <?php 
 require 'templates/footer.php';
 ob_end_flush();

@@ -3,7 +3,6 @@ ob_start();  // "output buffering" (buffer de saída) utilizado para evitar o er
              // "Cannot modify header information - headers already sent"
              // ao redirecionar a página com o método "header()".
 require 'templates/header.php';
-require 'classes/class.anuncios.php';
 
 if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   header('Location: index.php');
@@ -44,7 +43,6 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       <label for="categoria">Categoria</label>
       <select class="custom-select" name="categoria">
       <?php
-      require 'classes/class.categorias.php';
       $categorias = new Categorias($pdo);
       $categorias = $categorias->getLista();
 

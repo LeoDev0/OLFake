@@ -1,6 +1,30 @@
 <?php 
 require 'config.php';
 include 'classes/class.usuario.php';
+include 'classes/class.anuncios.php';
+require 'classes/class.categorias.php';
+
+$filtros = [
+  'categoria' => '',
+  'preco' => '',
+  'estado' => '',
+  'pesquisa' => ''
+];
+
+if (isset($_GET['filtros']) && !empty($_GET['filtros'])) {
+  $filtros = $_GET['filtros'];
+}
+
+$an = new Anuncios($pdo);
+$totalAnuncios = $an->getTotalAnuncios($filtros);
+
+$user = new Usuario($pdo);
+$totalUsuarios = $user->getTotalUsuarios();
+
+$cat = new Categorias($pdo);
+$categorias = $cat->getLista();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +39,8 @@ include 'classes/class.usuario.php';
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.php">Navbar</a>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-lg">
+    <a class="navbar-brand" href="index.php">OLFake</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -24,12 +48,18 @@ include 'classes/class.usuario.php';
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+        <!-- <form class="form-inline search-form" method="get"> -->
+        <div class="form-inline search-form">
+          <input form="form-filtros" class="form-control mr-2" name="filtros[pesquisa]" type="search" placeholder="O que deseja comprar?" aria-label="Search" value="<?= (!empty($_GET)) ? $_GET['filtros']['pesquisa']: '' ?>">
+          <button form="form-filtros" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+        <!-- </form> -->
         <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
         <a class="nav-item nav-link" href="meus_anuncios.php">Meus anúncios</a>
         <a class="nav-item nav-link" href="logout.php">Sair</a>
         <?php else: ?>
-        <a class="nav-item nav-link" href="" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
-        <a class="nav-item nav-link" href="" data-toggle="modal" data-target="#login-window">Login</a>
+        <a class="nav-item nav-link" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
+        <a class="nav-item nav-link" data-toggle="modal" data-target="#login-window">Login</a>
         <?php endif; ?>
       </div>
     </div>
@@ -49,7 +79,6 @@ include 'classes/class.usuario.php';
                 $email = $_POST['email'];
                 $senha = md5($_POST['senha']);
 
-                $user = new Usuario($pdo);
                 if ($user->fazerLogin($email, $senha)) {
                   header('Location: index.php');
                 } else {
@@ -86,9 +115,9 @@ include 'classes/class.usuario.php';
 
             </form>
           </div>
-          <!-- <div class="modal-footer">
-            <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
-          </div> -->
+          <div class="modal-footer justify-content-center">  
+            <a href="" class="text-center" data-dismiss="modal" data-toggle="modal" data-target="#signup-window">Ainda não possui uma conta? Faça uma agora.</a>
+          </div>
         </div>
       </div>
     </div>
@@ -109,7 +138,6 @@ include 'classes/class.usuario.php';
                 $senha = md5($_POST['senhaCadastro']);
 
                 if (!empty($nome) && !empty($email) && !empty($senha)) {
-                  $user = new Usuario($pdo);
                   if ($user->registrar($nome, $email, $senha)) {
                     header('Location: index.php');
                   } else {
@@ -160,9 +188,11 @@ include 'classes/class.usuario.php';
 
             </form>
           </div>
-          <!-- <div class="modal-footer">
-            <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
-          </div> -->
+
+          <div class="modal-footer justify-content-center">  
+            <a href="" class="text-center" data-dismiss="modal" data-toggle="modal" data-target="#login-window">Já possui conta? Faça login.</a>
+          </div>
+
         </div>
       </div>
     </div>

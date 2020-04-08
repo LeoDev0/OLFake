@@ -9,3 +9,24 @@
 .foto_item img {
   width: 150px;
 }
+
+.search-form {
+  margin-right: 40px;
+}
+
+.search-form > input {
+  width: 300px !important;
+}
+
+@media (max-width: 525px) {
+  .search-form > input {
+    width: 250px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

@@ -1,15 +1,18 @@
 <?php 
 ob_start();
 require 'templates/header.php';
-require 'classes/class.anuncios.php';
 
 $anuncios = new Anuncios($pdo);
-$totalAnuncios = $anuncios->getTotalAnuncios();
+// $totalAnuncios = $anuncios->getTotalAnuncios($filtros);
 
-$user = new Usuario($pdo);
-$totalUsuarios = $user->getTotalUsuarios();
+// $user = new Usuario($pdo);
+// $totalUsuarios = $user->getTotalUsuarios();
+
+// $categorias = new Categorias($pdo);
+// $categorias = $categorias->getLista();
 
 // Paginação dos anúncios
+
 $page = 1;  # página padrão, obviamente é a 1
 
 $limitePorPagina = 2;  # limite de carregamento de anúncios por página
@@ -22,12 +25,7 @@ if (isset($_GET['page']) && !empty($_GET['page'])) {
 $nextPage = $page + 1;
 $previousPage = $page - 1;
 
-// Voltar para a primeia página caso um usuário tente forçar acesso a uma página inexistente
-if ($_GET['page'] == 0 || $page > $totalPaginas) {
-  header('Location: index.php?page=1');
-}
-
-$anuncios = $anuncios->getUltimosAnuncios($page, $limitePorPagina);
+$anuncios = $anuncios->getUltimosAnuncios($page, $limitePorPagina, $filtros);
 
 // Se o usuário estiver logado, instanciar objeto da classe e pegar os dados cadastrais dele 
 if (isset($_SESSION['user_id'])) {
@@ -39,15 +37,60 @@ if (isset($_SESSION['user_id'])) {
 <div class="container-fluid">
 
   <div style="margin-top:20px;" class="jumbotron">
-    <h2>Nossa loja já possui <?= $totalAnuncios['total'] ?> anúncios e <?= $totalUsuarios['total'] ?> usuários cadastrados.</h2><br>
-    <h3>O que deseja comprar<?= isset($_SESSION['user_id']) ? ", " . ucfirst($user['nome']): "";?>?</h3>
-    <input class="form-control form-control-lg" type="text" placeholder="Pesquisar produto" width="200">
+    <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
+    <h1 class="text-center" style="margin-bottom: 30px;">Olá <?= ucfirst($user['nome']) ?>, seja bem-vindo.</h1>
+    <?php endif; ?>
+    <h2>Nossa loja já possui <?= $totalAnuncios['total'] ?> anúncios e <a href="vendedores.php"><?= $totalUsuarios['total'] ?> usuários cadastrados.</a></h2><br>
+
+    <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
+    <a href="add_anuncio.php" class="btn btn-warning btn-lg">Quero Anunciar</a>
+    <?php else: ?>
+    <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#login-window">Quero Anunciar</a>
+    <?php endif; ?>
   </div>
 
   <div class="row">
+
     <div class="col-sm-3">
       <h4>Pesquisa Avançada</h4>
+      <form id="form-filtros" method="get">
+
+        <div class="form-group">
+          <label for="categoria">Categoria:</label>
+          <select name="filtros[categoria]" class="form-control">
+          <option></option>
+          <?php foreach($categorias as $categoria): ?>
+          <option value="<?= $categoria['id'] ?>" <?= ($categoria['id'] == $filtros['categoria']) ? 'selected' : '' ?> ><?= $categoria['nome'] ?></option>
+          <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="preco">Preço:</label>
+          <select name="filtros[preco]" class="form-control">
+            <option></option>
+            <option value="1-100" <?= ($filtros['preco'] == '1-100') ? 'selected' : ''?>>R$ 1 - 100</option>
+            <option value="101-250" <?= ($filtros['preco'] == '101-250') ? 'selected' : ''?>>R$ 101 - 250</option>
+            <option value="251-500" <?= ($filtros['preco'] == '251-500') ? 'selected' : ''?>>R$ 251 - 500</option>
+            <option value="501-1000" <?= ($filtros['preco'] == '501-1000') ? 'selected' : ''?>>R$ 501 - 1000</option>
+            <option value="1001-1000000" <?= ($filtros['preco'] == '1001-1000000') ? 'selected' : ''?>>Mais de R$ 1000</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado de conservação:</label>
+          <select name="filtros[estado]" class="form-control">
+            <option></option>
+            <option value="0" <?= ($filtros['estado'] == '0') ? 'selected' : '' ?>>Ruim</option>
+            <option value="1" <?= ($filtros['estado'] == '1') ? 'selected' : '' ?>>Bom</option>
+            <option value="2" <?= ($filtros['estado'] == '2') ? 'selected' : '' ?>>Ótimo</option>
+          </select>
+        </div>
+
+        <button class="btn btn-info">Buscar</button>
+      </form>
     </div>
+
     <div class="col-sm-9">
       <h4>Últimos anúncios</h4>
       <table class="table table-striped">
@@ -71,6 +114,7 @@ if (isset($_SESSION['user_id'])) {
         </tbody>
       </table>
     </div>
+
   </div>
 
   <nav aria-label="Paginação">
@@ -84,7 +128,14 @@ if (isset($_SESSION['user_id'])) {
       </li>
 
       <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-      <li class="page-item <?= ($page == $i) ? 'active' : ''; ?>"><a class="page-link" href="index.php?page=<?= $i ?>"><?= $i ?></a></li>
+      <li class="page-item <?= ($page == $i) ? 'active' : ''; ?>">
+        <a class="page-link" href="index.php?<?php
+          $w = $_GET;
+          $w['page'] = $i;
+          echo http_build_query($w);
+          ?>"><?= $i ?>
+        </a>
+      </li>
       <? endfor; ?>
 
       <li class="page-item <?= ($nextPage > $totalPaginas) ? 'disabled' : ''; ?>">
@@ -98,7 +149,6 @@ if (isset($_SESSION['user_id'])) {
   </nav>
 
 </div>
-
 
 <?php
 require 'templates/footer.php';
