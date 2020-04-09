@@ -72,11 +72,16 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       </select>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <div class="custom-file" style="margin:30px 0 10px 0;">
         <input class="custom-file-input" id="browse" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg" aria-describedby="inputGroupFileAddon01">
         <label id="preview" class="custom-file-label" for="browse">Adicionar fotos do produto</label>
       </div>
+    </div> -->
+
+    <div style="margin-bottom:30px;">
+        <label for="fotos[]">Adicionar fotos</label><br>
+        <input class="breadcrumb" style="width:100%;" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg">
     </div>
 
     <button class="btn btn-primary">Adicionar produto</button>

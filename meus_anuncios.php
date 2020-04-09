@@ -55,7 +55,7 @@ if (isset($_SESSION['confirma_deletar']) && !empty($_SESSION['confirma_deletar']
       <td>R$ <?= number_format($anuncio['valor'], 2) ?></td>
       <td>
         <a class="btn btn-outline-dark" href="editar_anuncio.php?id=<?= $anuncio['id']; ?>">Editar</a>
-        <a class="btn btn-outline-danger" href="deletar_anuncio.php?id=<?= $anuncio['id']; ?>">Excluir</a>
+        <a class="btn btn-outline-danger" data-confirm href="deletar_anuncio.php?id=<?= $anuncio['id']; ?>">Excluir</a>
       </td>
     </tr>
     <?php endforeach; ?>
