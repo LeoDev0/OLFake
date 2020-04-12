@@ -40,10 +40,10 @@ $categorias = $cat->getLista();
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-sm shadow" style="background-color: #ffc107">
-  <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-lg"> -->
-    <a href="index.php"> <img height="40px" src="assets/images/logo.png" alt="logo"></a>
-    <!-- <a class="navbar-brand" href="index.php">OLFake</a> -->
+  <nav class="navbar navbar-expand-sm shadow navbar-light" style="background-color: #ffc107">
+    <a href="index.php">
+      <img height="40px" src="assets/images/logo.png" alt="logo" title="OLFake">
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -51,15 +51,27 @@ $categorias = $cat->getLista();
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <!-- <form class="form-inline search-form" method="get"> -->
-        <div class="form-inline search-form">
-          <input form="form-filtros" class="form-control mr-2" name="filtros[pesquisa]" type="search" placeholder="O que deseja comprar?" aria-label="Search" value="<?= (!empty($_GET)) ? $_GET['filtros']['pesquisa']: '' ?>">
-          <button form="form-filtros" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-        </div>
-        <!-- </form> -->
+        <form id="form-filtros" class="form-inline search-form" method="get" action="index.php">
+          <div class="input-group">
+            <input class="form-control" name="filtros[pesquisa]" type="search" placeholder="O que deseja comprar?" aria-label="Search" value="<?= (isset($_GET['filtros']) && !empty($_GET['filtros'])) ? $_GET['filtros']['pesquisa']: '' ?>">
+            <div class="input-group-append">
+              <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
         <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
+        <?php $usuario = $user->getDados($_SESSION['user_id']); ?>
         <a class="nav-item nav-link" href="meus_anuncios.php">Meus anúncios</a>
-        <a class="nav-item nav-link" href="logout.php">Sair</a>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img style="border-radius: 24px;" src="assets/images/profile-pics/<?= $usuario['foto_perfil'] ?>" height="30px" width="30px" alt="profile pic">
+            <span><?= ucfirst($usuario['nome']) ?></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="settings.php">Configurações</a>
+            <a class="dropdown-item" href="logout.php">Sair</a>
+          </div>
+        </div>
         <?php else: ?>
         <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
         <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#login-window">Login</a>

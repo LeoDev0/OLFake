@@ -60,4 +60,10 @@ class Usuario {
     $dados = $sql->fetch();
     return $dados;
   }
+
+  public function getDadosAll() {
+    $sql = "SELECT id, nome, email, (SELECT COUNT(id_usuario) FROM anuncios WHERE usuarios.id = anuncios.id_usuario) AS total_anuncios FROM usuarios ORDER BY total_anuncios DESC";
+    $sql = $this->pdo->query($sql);
+    return $sql->fetchAll();
+  }
 }

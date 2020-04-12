@@ -3,6 +3,7 @@ ob_start();  // "output buffering" (buffer de saída) utilizado para evitar o er
              // "Cannot modify header information - headers already sent"
              // ao redirecionar a página com o método "header()".
 require 'templates/header.php';
+$id = $_SESSION['user_id'];
 
 if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   header('Location: index.php');
@@ -39,7 +40,7 @@ if (isset($_SESSION['confirma_deletar']) && !empty($_SESSION['confirma_deletar']
     </thead>
     <?php
     $anuncios = new Anuncios($pdo);
-    $anuncios = $anuncios->getMeusAnuncios();
+    $anuncios = $anuncios->getMeusAnuncios($id);
 
     foreach ($anuncios as $anuncio):
     ?>

@@ -14,3 +14,13 @@ excluir_anuncio_btn.forEach(
       }
     })
 );
+
+// Trocando foto de perfil
+const changePhotoBtn = document.getElementById("change-photo-btn");
+const submitPhotoElem = document.querySelector(".submit-profile-photo");
+
+// Ao clicar no elemento com a foto do perfil, um outro evento de clique
+// é iniciado no elemento de envio de arquivos que está escondido na barra de navegação
+changePhotoBtn.onclick = () => {
+  submitPhotoElem.click();
+};

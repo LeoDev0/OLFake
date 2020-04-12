@@ -1,2 +1,5 @@
-assets/images/anuncios/
+assets/images/anuncios/*
+assets/images/profile-pics/*
+
 !assets/images/anuncios/default.jpg
+!assets/images/profile-pics/default-profile.png

@@ -115,7 +115,7 @@ class Anuncios {
     return $row;
   }
 
-  public function getMeusAnuncios() {
+  public function getMeusAnuncios($user_id) {
     $array = array();
 
     $sql = "SELECT *, 
@@ -125,7 +125,7 @@ class Anuncios {
      FROM anuncios 
      WHERE id_usuario = :id_usuario";
     $sql = $this->pdo->prepare($sql);
-    $sql->bindValue(":id_usuario", $_SESSION['user_id']);
+    $sql->bindValue(":id_usuario", $user_id);
     $sql->execute();
 
     if ($sql->rowCount() > 0) {

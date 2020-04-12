@@ -9,8 +9,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
   $sql = $pdo->query("SELECT id_usuario FROM anuncios WHERE id = $id_anuncio");
   if ($sql->rowCount() > 0) {
     $id_usuario = $sql->fetch()['id_usuario'];
-
     $anuncio = $anuncio->getAnuncio($id_anuncio, $id_usuario);
+
+    $usuario = new Usuario($pdo);
+    $vendedor = $usuario->getDados($id_usuario);
   } else {
     header('Location: index.php');  
   }
@@ -49,8 +51,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     </div>
     <div class="col-sm-7">
       <h1><?= $anuncio['titulo'] ?></h1>
-      <h4><?= $anuncio['categoria'] ?></h4>
+      <h4>Categoria: <?= $anuncio['categoria'] ?></h4>
       <p><?= $anuncio['descricao'] ?></p>
+      <p>Vendedor: <a href="anuncios_usuario.php?id=<?= $id_usuario?>"><?= ucfirst($vendedor['nome']) ?></a></p>
       <br>
       <h3>R$ <?= number_format($anuncio['valor'], 2) ?></h3>
     </div>
