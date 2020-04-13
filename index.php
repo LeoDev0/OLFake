@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
 
   <div style="margin-top:20px;" class="jumbotron">
     <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
-    <h1 class="text-center" style="margin-bottom: 30px;">Olá <?= ucfirst($user['nome']) ?>, seja bem-vindo.</h1>
+    <h1 style="margin-bottom: 30px;">Olá <?= ucfirst($user['nome']) ?>, seja bem-vindo.</h1>
     <?php endif; ?>
     <h2>Nossa loja já possui <?= $totalAnuncios['total'] ?> anúncios e <a href="vendedores.php"><?= $totalUsuarios['total'] ?> usuários cadastrados.</a></h2><br>
 

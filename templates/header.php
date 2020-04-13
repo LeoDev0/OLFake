@@ -73,8 +73,8 @@ $categorias = $cat->getLista();
           </div>
         </div>
         <?php else: ?>
-        <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
         <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#login-window">Login</a>
+        <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
         <?php endif; ?>
       </div>
     </div>
