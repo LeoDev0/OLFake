@@ -84,7 +84,7 @@ $categorias = $cat->getLista();
 
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color: #ffc107">
             <h5 class="modal-title">Faça login na sua conta.</h5>
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>
@@ -141,7 +141,7 @@ $categorias = $cat->getLista();
     <div class="modal fade" id="signup-window">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color: #ffc107">
             <h5 class="modal-title">Cadastre-se para anunciar ou comprar já!</h5>
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>

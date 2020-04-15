@@ -47,6 +47,23 @@ if (isset($_POST['novo_nome']) && !empty($_POST['novo_nome'])) {
   }
 }
 
+if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
+  $senha_confirmacao = md5($_POST['senha_deletar']);
+  
+  if ($senha_confirmacao === $dados['senha']) {
+    $anuncios = new Anuncios($pdo);
+    $anuncios->deletarTodosAnuncios($id_usuario);
+    $usuario->deletarUsuario($id_usuario);
+    
+    $_SESSION['conta-deletada'] = true;
+    unset($_SESSION['user_id']);
+    header("Location: deletado.php");
+  } else {
+    echo '<script language="javascript">';
+    echo 'alert("Senha incorreta! Deleção abortada.")';
+    echo '</script>';
+  }
+}
 ?>
 
 <div style="margin-top: 50px;" class="container">
@@ -112,17 +129,14 @@ if (isset($_POST['novo_nome']) && !empty($_POST['novo_nome'])) {
     </div>
 
     <div style="margin-top:80px;" class="text-center">
-      <!-- <a class="btn btn-danger" href="">Deletar conta</a> -->
       <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deletar-conta-window">Deletar conta</a>
     </div>
   </div>
 
 </div>
 
-
 <!-- Modal de deleção de conta -->
 <div class="modal fade" id="deletar-conta-window">
-
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -130,7 +144,7 @@ if (isset($_POST['novo_nome']) && !empty($_POST['novo_nome'])) {
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>
           <div class="modal-body">
-            <form method="post" action="">
+            <form method="post">
               <div class="form-group">
                 <label for="senha_deletar">Confirme sua senha:</label>
                 <div class="input-group">
@@ -140,12 +154,9 @@ if (isset($_POST['novo_nome']) && !empty($_POST['novo_nome'])) {
               <button class="btn btn-danger btn-block">Confirmar deleção</button>
             </form>
           </div>
-          <div class="modal-footer justify-content-center"> 
-          </div>
         </div>
       </div>
     </div>
-
 </div>
 
 <?php

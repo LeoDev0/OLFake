@@ -131,4 +131,17 @@ class Usuario {
     }
   }
 
+  public function deletarUsuario($id_usuario) {
+    // Primeiro deletar a imagem de perfil do servidor caso ela não seja a padrão
+    $dados = $this->getDados($id_usuario);
+    if ($dados['foto_perfil'] !== "default-profile.png") {
+      unlink("assets/images/profile-pics/" . $dados['foto_perfil']);
+    }
+
+    $sql = "DELETE FROM usuarios WHERE id = :id_usuario";
+    $sql = $this->pdo->prepare($sql);
+    $sql->bindValue("id_usuario", $id_usuario);
+    $sql->execute();
+  }
+
 }

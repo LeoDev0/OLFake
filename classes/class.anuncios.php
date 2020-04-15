@@ -199,7 +199,7 @@ class Anuncios {
       }
     }
 
-    // depois os dados dela das fotos do anuncio, incluindo url, são apagadas do banco de dados
+    // depois os dados das fotos do anuncio, incluindo url, são apagadas do banco de dados
     $sql = "DELETE FROM anuncios_imagens WHERE id_anuncio = :id_anuncio";
     $sql = $this->pdo->prepare($sql);
     $sql->bindValue(":id_anuncio", $id_anuncio);
@@ -211,6 +211,21 @@ class Anuncios {
     $sql->bindValue(":id_anuncio", $id_anuncio);
     $sql->bindValue(":id_usuario", $id_usuario);
     $sql->execute();
+  }
+
+  public function deletarTodosAnuncios($id_usuario) {
+    $anuncios = $this->getMeusAnuncios($id_usuario);
+    if (count($anuncios) > 0) {
+      $ids_anuncios = array();
+
+      foreach ($anuncios as $anuncio) {
+        $ids_anuncios[] = $anuncio['id'];
+      }
+  
+      foreach ($ids_anuncios as $id_anuncio) {
+        $this->deletarAnuncio($id_anuncio, $id_usuario);
+      }
+    }
   }
 
   public function editarAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id_anuncio) {

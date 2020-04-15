@@ -80,7 +80,7 @@ if (isset($_SESSION['user_id'])) {
           </select>
         </div>
 
-        <button form="form-filtros" class="btn btn-info">Filtrar</button>
+        <button style="margin-bottom: 30px;" form="form-filtros" class="btn btn-info">Filtrar</button>
     </div>
 
     <div class="col-sm-9">
