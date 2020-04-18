@@ -21,7 +21,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 }
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 50px;">
   <div class="row" style="margin:20px 0;">
     <div class="col-sm-5">
 
@@ -55,10 +55,46 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
       <p><?= $anuncio['descricao'] ?></p>
       <p>Vendedor: <a href="anuncios_usuario.php?id=<?= $id_usuario?>"><?= ucfirst($vendedor['nome']) ?></a></p>
       <br>
-      <h3>R$ <?= number_format($anuncio['valor'], 2) ?></h3>
+      <h3>R$ <?= number_format($anuncio['valor'], 2, ',', '.') ?></h3>
+      <br>
+      <button 
+        class="btn btn-lg btn-success"
+        data-toggle="modal"
+        <?= isset($_SESSION['user_id']) && !empty($_SESSION['user_id']) ? "data-target='#offer-window'": "data-target='#login-window'" ?>>
+        Fazer oferta</button>
     </div>
   </div>
 </div>
 
+<!-- Modal botão de fazer oferta -->
+<div class="modal fade" id="offer-window">
+
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #ffc107">
+            <h5 class="modal-title">Comprar <?= $anuncio['titulo'] ?></h5>
+            <button class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="email">Valor da oferta:</label>
+              <div class="input-group">
+                <input class="form-control" type="number" value="<?= $anuncio['valor'] ?>">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Mensagem para o vendedor:</label>
+              <div class="input-group">
+                <textarea class="form-control" cols="30" rows="5" placeholder="Escreva uma mensagem ao vendedor falando sobre seu interesse no produto e adicionando observações sobre seu pedido (cor, tamanho, tipo, forma de pagamento etc.)"></textarea>
+              </div>
+            </div>
+
+            <button class="btn btn-block btn-success">Enviar oferta</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 <?php require 'templates/footer.php'; ?>

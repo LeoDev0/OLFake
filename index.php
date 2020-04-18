@@ -100,7 +100,7 @@ if (isset($_SESSION['user_id'])) {
               <a href="produto.php?id=<?= $anuncio['id'] ?>"><?= $anuncio['titulo'] ?></a>
               <p><?= $anuncio['categoria'] ?></p>
             </td>
-            <td>R$ <?= number_format($anuncio['valor'], 2) ?></td>
+            <td>R$ <?= number_format($anuncio['valor'], 2, ',', '.') ?></td>
           </tr>
         <?php endforeach; ?>
         </tbody>

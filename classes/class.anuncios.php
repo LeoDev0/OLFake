@@ -135,6 +135,12 @@ class Anuncios {
     return $array;
   }
 
+  public function getTotalMeusAnuncios($user_id) {
+    $sql = "SELECT COUNT(*) AS total FROM anuncios WHERE id_usuario = $user_id";
+    $sql = $this->pdo->query($sql);
+    return $sql->fetch();
+  } 
+
   public function getAnuncio($id_anuncio, $id_usuario) {
     $sql = "SELECT *, 
       (SELECT categorias.nome FROM categorias 
