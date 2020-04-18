@@ -7,7 +7,7 @@ $anuncios = new Anuncios($pdo);
 // Paginação dos anúncios
 $page = 1;  # página padrão, obviamente é a 1
 
-$limitePorPagina = 2;  # limite de carregamento de anúncios por página
+$limitePorPagina = 3;  # limite de carregamento de anúncios por página
 $totalPaginas = ceil($totalAnuncios['total'] / $limitePorPagina);
 
 if (isset($_GET['page']) && !empty($_GET['page'])) {

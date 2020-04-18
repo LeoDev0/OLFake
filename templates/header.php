@@ -1,4 +1,8 @@
 <?php 
+// formata as datas/hora/local de acordo com os padrões brasileiros
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');  
+// date_default_timezone_set('America/Sao_Paulo');
+
 require 'config.php';
 include 'classes/class.usuario.php';
 include 'classes/class.anuncios.php';

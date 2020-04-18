@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   header('Location: index.php');
 }
 
-if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
+if (isset($_POST['titulo']) && !empty($_POST['titulo']) && !empty($_POST['valor'])) {
   $anuncio = new Anuncios($pdo);
 
   $titulo = $_POST['titulo'];
@@ -71,13 +71,6 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
         <option value="2">Ótimo</option>
       </select>
     </div>
-
-    <!-- <div class="form-group">
-      <div class="custom-file" style="margin:30px 0 10px 0;">
-        <input class="custom-file-input" id="browse" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg" aria-describedby="inputGroupFileAddon01">
-        <label id="preview" class="custom-file-label" for="browse">Adicionar fotos do produto</label>
-      </div>
-    </div> -->
 
     <div style="margin-bottom:30px;">
         <label for="fotos[]">Adicionar fotos</label><br>

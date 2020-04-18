@@ -64,6 +64,7 @@ if (isset($_SESSION['confirma_deletar']) && !empty($_SESSION['confirma_deletar']
 
   </table>
 </div>
+<script src="assets/js/meus_anuncios.js"></script>
 
 <?php 
 require 'templates/footer.php';

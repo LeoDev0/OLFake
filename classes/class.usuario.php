@@ -38,11 +38,14 @@ class Usuario {
     $sql->execute();
 
     if ($sql->rowCount() == 0) {
-      $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)";
+      $data_atual = date('Y-m-d');
+      
+      $sql = "INSERT INTO usuarios (nome, email, senha, data_registro) VALUES (:nome, :email, :senha, :data_registro)";
       $sql = $this->pdo->prepare($sql);
       $sql->bindValue(":nome", $nome);
       $sql->bindValue(":email", $email);
       $sql->bindValue(":senha", $senha);
+      $sql->bindValue(":data_registro", $data_atual);
       $sql->execute();
 
       // faz login automático na conta após criá-la

@@ -13,17 +13,16 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 } else {
   header('Location: index.php');
 }
-
 ?>
 
 <div class="container" style="margin-top:50px;">
-  <h2 class="text-center" style="margin-bottom:30px;">Página do anunciante</h2>
+  <h2 style="margin-bottom:30px;">Página do anunciante</h2>
 
   <div style="margin-bottom: 40px;" class="breadcrumb align-items-center">
     <img style="width: 18rem; margin:10px 70px 10px 10px;" src="assets/images/profile-pics/<?= $vendedor['foto_perfil'] ?>" alt="profile-pic">
     <div>
       <h5><?= ucfirst($vendedor['nome']) ?></h5><br>
-      <p>Na OLFake desde janeiro de 2019</p>
+      <p>Na OLFake desde <?= strftime('%d de %B de %Y', strtotime($vendedor['data_registro'])) ?></p>
       <p>Contato: <a href="mailto:<?= $vendedor['email'] ?>"><?= $vendedor['email'] ?></a></p>
       <p>Total de anúncios: <strong><?= $total_anuncios['total'] ?></strong></p>
     </div>

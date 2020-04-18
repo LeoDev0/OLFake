@@ -1,6 +1,6 @@
 <?php
+ob_start();
 require 'templates/header.php';
-// require 'classes/class.anuncios.php';
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
   $id_anuncio = $_GET['id'];
@@ -69,32 +69,46 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 <!-- Modal botão de fazer oferta -->
 <div class="modal fade" id="offer-window">
 
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header" style="background-color: #ffc107">
-            <h5 class="modal-title">Comprar <?= $anuncio['titulo'] ?></h5>
-            <button class="close" data-dismiss="modal"><span>&times;</span></button>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #ffc107">
+        <h5 class="modal-title">Comprar <?= $anuncio['titulo'] ?></h5>
+        <button class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="cont">
+          <div class="confirmation-message text-center d-none">
+            <h2 style="margin-top:60px;">🎉 Oferta enviada ao vendedor! 🎉</h2><br>
+            <h5>Agora o jeito é esperar...</h5>
           </div>
-          <div class="modal-body">
 
-            <div class="form-group">
-              <label for="email">Valor da oferta:</label>
-              <div class="input-group">
-                <input class="form-control" type="number" value="<?= $anuncio['valor'] ?>">
-              </div>
+          <div class="form-group">
+            <label for="email">Valor da oferta:</label>
+            <div class="input-group">
+              <input class="form-control" type="number" value="<?= $anuncio['valor'] ?>">
             </div>
-
-            <div class="form-group">
-              <label for="email">Mensagem para o vendedor:</label>
-              <div class="input-group">
-                <textarea class="form-control" cols="30" rows="5" placeholder="Escreva uma mensagem ao vendedor falando sobre seu interesse no produto e adicionando observações sobre seu pedido (cor, tamanho, tipo, forma de pagamento etc.)"></textarea>
-              </div>
-            </div>
-
-            <button class="btn btn-block btn-success">Enviar oferta</button>
           </div>
+
+          <div class="form-group">
+            <label for="email">Mensagem para o vendedor:</label>
+            <div class="input-group">
+              <textarea style="resize:none;" class="form-control" cols="30" rows="5" placeholder="Escreva uma mensagem ao vendedor falando sobre seu interesse no produto e adicionando observações sobre seu pedido (cor, tamanho, tipo, forma de pagamento etc.)"></textarea>
+            </div>
+          </div>
+
+          <button id="send-offer" class="btn btn-block btn-success">
+            Enviar oferta
+            <i id="animation-icon" class="d-none fa fa-circle-o-notch fa-spin"></i>
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-<?php require 'templates/footer.php'; ?>
+</div>
+<script src="assets/js/produto.js"></script>
+
+<?php
+require 'templates/footer.php';
+ob_end_flush();
+?>

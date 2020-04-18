@@ -158,6 +158,7 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
       </div>
     </div>
 </div>
+<script src="assets/js/settings.js"></script>
 
 <?php
 require 'templates/footer.php';
