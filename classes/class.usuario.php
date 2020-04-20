@@ -15,6 +15,8 @@ class Usuario {
   }
 
   public function fazerLogin($email, $senha) {
+    $senha = md5($senha);
+
     $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha";
     $sql = $this->pdo->prepare($sql);
     $sql->bindValue(":email", $email);
@@ -31,6 +33,9 @@ class Usuario {
   }
 
   public function registrar($nome, $email, $senha) {
+    $nome = filter_var($nome, FILTER_SANITIZE_SPECIAL_CHARS);
+    $senha = md5($senha);
+
     // primeiro é checado se o email já está cadastrado no banco de dados
     $sql = "SELECT id FROM usuarios WHERE email = :email";
     $sql = $this->pdo->prepare($sql);
@@ -82,6 +87,8 @@ class Usuario {
   }
 
   public function changeDados($id_usuario, $nome, $senha_antiga, $nova_senha) {
+    $nome = filter_var($nome, FILTER_SANITIZE_SPECIAL_CHARS);
+
     // Primeiro a senha do usuário é pega no banco de dados para 
     // ser enviada como parâmetro no método "changeSenha()" abaixo
     // e lá ser comparada com a digitada pelo usuário

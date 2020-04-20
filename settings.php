@@ -28,10 +28,12 @@ if (isset($_FILES['submit-photo']) && !empty($_FILES['submit-photo'])) {
   }
 }
 
-if (isset($_POST['novo_nome']) && !empty($_POST['novo_nome'])) {
-  $nome = $_POST['novo_nome'];
+
+if (isset($_POST['novo_nome']) && !empty(trim($_POST['novo_nome']))) {
+  $nome = trim($_POST['novo_nome']);
   $senha_antiga = $_POST['senha_antiga'];
   $nova_senha = $_POST['nova_senha'];
+
   $msg = $usuario->changeDados($id_usuario, $nome, $senha_antiga, $nova_senha);
 
   switch ($msg) {
@@ -91,23 +93,32 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
           </div>
 
           <div class="form-group">
-            <label for="email">Senha antiga:</label>
+            <label for="senha_antiga">Senha antiga:</label>
             <div class="input-group">
-              <input class="form-control" type="password" name="senha_antiga">
+              <input data-password-input class="form-control" type="password" name="senha_antiga">
+              <div class="input-group-append">
+                <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="email">Nova senha:</label>
             <div class="input-group">
-              <input id="nova_senha" class="form-control" type="password" name="nova_senha">
+              <input data-password-input id="nova_senha" class="form-control" type="password" name="nova_senha">
+              <div class="input-group-append">
+                <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
             <label for="email">Confirmar nova senha:</label>
             <div class="input-group">
-              <input id="confirma_senha" class="form-control" type="password">
+              <input data-password-input id="confirma_senha" class="form-control" type="password">
+              <div class="input-group-append">
+                <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+              </div>
             </div>
           </div>
 

@@ -15,11 +15,11 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])
   header('Location: index.php');
 }
 
-if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
-  $titulo = $_POST['titulo'];
+if (isset($_POST['titulo']) && !empty(trim($_POST['titulo']))) {
+  $titulo = trim($_POST['titulo']);
   $categoria = $_POST['categoria'];
   $valor = $_POST['valor'];
-  $descricao = $_POST['descricao'];
+  $descricao = trim($_POST['descricao']);
   $estado = $_POST['estado'];
   $id_anuncio = $_GET['id'];
   if (isset($_FILES['fotos'])) {
@@ -40,8 +40,8 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
   <form method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-      <label for="titulo">Título do anúncio</label>
-      <input class="form-control" type="text" name="titulo" value="<?= $info['titulo'] ?>">
+      <label for="titulo">Título do anúncio <span style="color:red; font-weight:600;">*</span></label>
+      <input class="form-control" type="text" name="titulo" value="<?= $info['titulo'] ?>" required>
     </div>
 
     <div class="form-group">
@@ -62,8 +62,8 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
     </div>
 
     <div class="form-group">
-      <label for="valor">Valor</label>
-      <input class="form-control" type="number" name="valor" value="<?= $info['valor'] ?>">
+      <label for="valor">Valor <span style="color:red; font-weight:600;">*</span></label>
+      <input class="form-control" type="number" name="valor" value="<?= $info['valor'] ?>" min='0' required>
     </div>
 
     <div class="form-group">
@@ -81,10 +81,6 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
     </div>
 
     <div class="form-group">
-      <!-- <div class="custom-file" style="margin:30px 0 10px 0;">
-        <input class="custom-file-input" id="browse" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg" aria-describedby="inputGroupFileAddon01">
-        <label id="preview" class="custom-file-label" for="browse">Adicionar fotos</label>
-      </div> -->
       <div style="margin-bottom:20px;">
         <label for="fotos[]">Adicionar fotos</label><br>
         <input class="breadcrumb" style="width:100%;" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg">

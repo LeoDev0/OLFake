@@ -13,6 +13,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     $usuario = new Usuario($pdo);
     $vendedor = $usuario->getDados($id_usuario);
+
+    $qt_fotos = count($anuncio['fotos']);
   } else {
     header('Location: index.php');  
   }
@@ -32,11 +34,21 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <?php endforeach; ?>
         </ol>
         <div class="carousel-inner">
-        <?php foreach ($anuncio['fotos'] as $chave => $foto): ?>
-          <div class="carousel-item <?= ($chave == 0) ? 'active': '' ?>">
-            <img class="d-block w-100" src="assets/images/anuncios/<?= $foto['url'] ?>" alt="slide <?= $chave + 1 ?>">
+
+        <!-- Caso o anúncio tenha fotos, as exibe. -->
+        <?php if ($qt_fotos > 0): ?>
+          <?php foreach ($anuncio['fotos'] as $chave => $foto): ?>
+            <div class="carousel-item <?= ($chave == 0) ? 'active': '' ?>">
+              <img class="d-block w-100" src="assets/images/anuncios/<?= $foto['url'] ?>" alt="slide <?= $chave + 1 ?>">
+            </div>
+          <?php endforeach; ?>
+        <!-- ...caso não tenha fotos adicionadas, exibe a imagem padrão. -->
+        <?php else: ?>
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="assets/images/anuncios/default.jpg" alt="slide">
           </div>
-        <?php endforeach; ?>
+        <?php endif; ?>
+
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -52,6 +64,15 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <div class="col-sm-7">
       <h1><?= $anuncio['titulo'] ?></h1>
       <h4>Categoria: <?= $anuncio['categoria'] ?></h4>
+
+      <?php if ($anuncio['estado'] == 0): ?>
+      <h4>Estado de conservação: Ruim</h4>
+      <?php elseif ($anuncio['estado'] == 1): ?>
+      <h4>Estado de conservação: Bom</h4>
+      <?php elseif ($anuncio['estado'] == 2): ?>
+      <h4>Estado de conservação: Ótimo</h4>
+      <?php endif; ?>
+      
       <p><?= $anuncio['descricao'] ?></p>
       <p>Vendedor: <a href="anuncios_usuario.php?id=<?= $id_usuario?>"><?= ucfirst($vendedor['nome']) ?></a></p>
       <br>
@@ -61,7 +82,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         class="btn btn-lg btn-success"
         data-toggle="modal"
         <?= isset($_SESSION['user_id']) && !empty($_SESSION['user_id']) ? "data-target='#offer-window'": "data-target='#login-window'" ?>>
-        Fazer oferta</button>
+        Fazer oferta
+      </button>
     </div>
   </div>
 </div>

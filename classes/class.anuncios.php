@@ -173,6 +173,10 @@ class Anuncios {
   }
 
   public function addAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos) {
+    $titulo = filter_var($titulo, FILTER_SANITIZE_SPECIAL_CHARS);
+    $valor = filter_var($valor, FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_var($descricao, FILTER_SANITIZE_SPECIAL_CHARS);
+
     $id_usuario = $_SESSION['user_id'];
 
     $sql = "INSERT INTO anuncios (id_usuario ,titulo, id_categoria, valor, descricao, estado)
@@ -235,6 +239,9 @@ class Anuncios {
   }
 
   public function editarAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id_anuncio) {
+    $titulo = filter_var($titulo, FILTER_SANITIZE_SPECIAL_CHARS);
+    $valor = filter_var($valor, FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_var($descricao, FILTER_SANITIZE_SPECIAL_CHARS);
     $id_usuario = $_SESSION['user_id'];
 
     $sql = "UPDATE anuncios SET id_usuario = :id_usuario,

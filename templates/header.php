@@ -96,7 +96,7 @@ $categorias = $cat->getLista();
             <?php 
               if (isset($_POST['email']) && !empty($_POST['email'])) {
                 $email = $_POST['email'];
-                $senha = md5($_POST['senha']);
+                $senha = $_POST['senha'];
 
                 if ($user->fazerLogin($email, $senha)) {
                   header('Location: index.php');
@@ -112,25 +112,28 @@ $categorias = $cat->getLista();
 
               <div class="form-group">
                 <label for="email">Email:</label>
-                <div class="input-group">
+                <div class="input-group input-group-lg">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">✉️</span>
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                   </div>
-                  <input class="form-control" type="email" name="email">
+                  <input class="form-control" type="email" name="email" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="senha">Senha:</label>
-                <div class="input-group">
+                <div class="input-group input-group-lg">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">🔑</span>
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
                   </div>
-                  <input class="form-control" type="password" name="senha">
+                  <input data-password-input class="form-control" type="password" name="senha" required>
+                  <div class="input-group-append">
+                    <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                  </div>
                 </div>
               </div>
 
-              <button class="btn btn-primary btn-block">Entrar</button>
+              <button style="margin-top:40px;" class="btn btn-primary btn-block btn-lg">Entrar</button>
 
             </form>
           </div>
@@ -152,32 +155,54 @@ $categorias = $cat->getLista();
           <div class="modal-body">
             <?php
               if (isset($_POST['nome']) && !empty($_POST['nome'])) {
-                $nome = $_POST['nome'];
-                $email = $_POST['emailCadastro'];
-                $senha = md5($_POST['senhaCadastro']);
+                $nome = trim($_POST['nome']);
+                $email = trim($_POST['emailCadastro']);
+                $senha = $_POST['senhaCadastro'];
 
+                // Checa se todos os campos foram preenchidos
                 if (!empty($nome) && !empty($email) && !empty($senha)) {
-                  if ($user->registrar($nome, $email, $senha)) {
-                    header('Location: index.php');
+                  
+                  // Checa se a senha tem o mínimo de caracteres exigido 
+                  if (strlen($senha) >= 8) {
+
+                    // Checa se o email digitado é válido
+                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                      if ($user->registrar($nome, $email, $senha)) {
+                        header('Location: index.php');
+                      } else {
+                        echo '<script language="javascript">';
+                        echo 'alert("Conta de email já cadastrada! Utilize outro email.")';
+                        echo '</script>';
+                      }
+
+                    } else {
+                      echo '<script language="javascript">';
+                      echo 'alert("Formato de email inválido. Digite um email válido.")';
+                      echo '</script>';
+                    }
+
                   } else {
                     echo '<script language="javascript">';
-                    echo 'alert("Conta de email já cadastrada! Utilize outro email.")';
+                    echo 'alert("A senha precisa ter no mínimo 8 caracteres.")';
                     echo '</script>';
                   }
+
                 } else {
                   echo '<script language="javascript">';
-                  echo 'alert("Preencha todos os campos.")';
+                  echo 'alert("Preencha corretamente todos os campos.")';
                   echo '</script>';   
                 }
+
               }
             ?>
             <form method="post">
 
               <div class="form-group">
                 <label for="email">Nome:</label>
-                <div class="input-group">
+                <div class="input-group input-group-lg">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">👤</span>
+                    <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
                   </div>
                   <input class="form-control" type="text" name="nome">
                 </div>
@@ -185,9 +210,9 @@ $categorias = $cat->getLista();
 
               <div class="form-group">
                 <label for="email">Email:</label>
-                <div class="input-group">
+                <div class="input-group input-group-lg">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">✉️</span>
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                   </div>
                   <input class="form-control" type="email" name="emailCadastro">
                 </div>
@@ -195,15 +220,18 @@ $categorias = $cat->getLista();
 
               <div class="form-group">
                 <label for="senha">Senha:</label>
-                <div class="input-group">
+                <div class="input-group input-group-lg">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">🔑</span>
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
                   </div>
-                  <input class="form-control" type="password" name="senhaCadastro">
+                  <input data-password-input class="form-control" type="password" name="senhaCadastro">
+                  <div class="input-group-append">
+                    <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                  </div>
                 </div>
               </div>
 
-              <button class="btn btn-primary btn-block">Cadastrar</button>
+              <button style="margin-top:40px;" class="btn btn-primary btn-block btn-lg">Cadastrar</button>
 
             </form>
           </div>

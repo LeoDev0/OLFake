@@ -11,8 +11,6 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   // echo '<script> window.location.href="index.php"; </script>';
 }
 
-$a = new Anuncios($pdo);
-$total_anuncios = $a->getTotalMeusAnuncios($id); 
 // exibe mensagem de confirmação de criação/deleção de anúncio caso essa $_SESSION
 // tenha sido criada no arquivo 'add_anuncio.php'/'deletar_anuncio.php'
 if (isset($_SESSION['confirma_add']) && !empty($_SESSION['confirma_add'])) {
@@ -25,6 +23,8 @@ if (isset($_SESSION['confirma_deletar']) && !empty($_SESSION['confirma_deletar']
   unset($_SESSION['confirma_deletar']);
 }
 
+$a = new Anuncios($pdo);
+$total_anuncios = $a->getTotalMeusAnuncios($id);
 ?>
 
 <div class="container" style="margin-top:50px;">

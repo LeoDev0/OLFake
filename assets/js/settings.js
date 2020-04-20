@@ -15,7 +15,9 @@ const dados_form = document.getElementById("dados_form");
 
 dados_form.onsubmit = () => {
   if (input_nova_senha.value != input_confirma_senha.value) {
-    alert("Senhas digitadas não são iguais!");
+    input_nova_senha.style.border = "solid 1px red";
+    input_confirma_senha.style.border = "solid 1px red";
+    alert('Os campos "Nova senha" e "Confirmar nova senha" não são iguais!');
     return false;
   }
 };

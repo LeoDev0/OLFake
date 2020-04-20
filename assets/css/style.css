@@ -79,3 +79,10 @@ iframe {
   z-index: 999;
   position: absolute;
 }
+
+.show-hide-pass {
+  background-color: white;
+  border: solid 1px lightgrey;
+  border-left: none;
+  color: grey;
+}

@@ -8,13 +8,13 @@ if (!isset($_SESSION['user_id']) && empty($_SESSION['id'])) {
   header('Location: index.php');
 }
 
-if (isset($_POST['titulo']) && !empty($_POST['titulo']) && !empty($_POST['valor'])) {
+if (isset($_POST['titulo']) && !empty(trim($_POST['titulo'])) && !empty($_POST['valor'])) {
   $anuncio = new Anuncios($pdo);
 
-  $titulo = $_POST['titulo'];
+  $titulo = trim($_POST['titulo']);
   $categoria = $_POST['categoria'];
   $valor = $_POST['valor'];
-  $descricao = $_POST['descricao'];
+  $descricao = trim($_POST['descricao']);
   $estado = $_POST['estado'];
   if (isset($_FILES['fotos'])) {
     $fotos = $_FILES['fotos'];
@@ -35,8 +35,8 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo']) && !empty($_POST['valor'
   <form method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-      <label for="titulo">Título do anúncio</label>
-      <input class="form-control" type="text" name="titulo">
+      <label for="titulo">Título do anúncio <span style="color:red; font-weight:600;">*</span></label>
+      <input class="form-control" type="text" name="titulo" required>
     </div>
 
     <div class="form-group">
@@ -54,8 +54,8 @@ if (isset($_POST['titulo']) && !empty($_POST['titulo']) && !empty($_POST['valor'
     </div>
 
     <div class="form-group">
-      <label for="valor">Valor</label>
-      <input class="form-control" type="number" name="valor">
+      <label for="valor">Valor <span style="color:red; font-weight:600;">*</span></label>
+      <input class="form-control" type="number" name="valor" min='0' required>
     </div>
 
     <div class="form-group">
