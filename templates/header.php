@@ -65,7 +65,7 @@ $categorias = $cat->getLista();
         </form>
         <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
         <?php $usuario = $user->getDados($_SESSION['user_id']); ?>
-        <a class="nav-item nav-link" href="meus_anuncios.php">Meus anúncios</a>
+        <a class="nav-item nav-link" href="meus_anuncios.php"><i class="fas fa-bullhorn"></i> Meus anúncios</a>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img style="border-radius: 24px;" src="assets/images/profile-pics/<?= $usuario['foto_perfil'] ?>" height="30px" width="30px" alt="profile pic">
@@ -77,7 +77,7 @@ $categorias = $cat->getLista();
           </div>
         </div>
         <?php else: ?>
-        <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#login-window">Login</a>
+        <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#login-window"><i class="far fa-user-circle"></i> Login</a>
         <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
         <?php endif; ?>
       </div>
@@ -224,7 +224,7 @@ $categorias = $cat->getLista();
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                   </div>
-                  <input data-password-input class="form-control" type="password" name="senhaCadastro">
+                  <input data-password-input class="form-control" type="password" name="senhaCadastro" pattern=".{8,}" required title="No mínimo 8 caracteres">
                   <div class="input-group-append">
                     <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
                   </div>

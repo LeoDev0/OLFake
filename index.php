@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
 
   <div style="margin-top:20px;" class="jumbotron">
     <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
-    <h1 style="margin-bottom: 30px;">Olá <?= ucfirst($user['nome']) ?>, seja bem-vindo.</h1>
+    <h1 style="margin-bottom: 30px;">Olá <?= ucfirst($user['nome']) ?>, seja bem-vindo à OLFake.</h1>
     <?php endif; ?>
     <h2>Nossa loja já possui <?= $totalAnuncios['total'] ?> anúncios e <a href="vendedores.php"><?= $totalUsuarios['total'] ?> usuários cadastrados.</a></h2><br>
 
@@ -85,15 +85,17 @@ if (isset($_SESSION['user_id'])) {
 
     <div class="col-sm-9">
       <h4>Últimos anúncios</h4>
+
+      <?php if ($totalAnuncios['total'] > 0): ?>
       <table class="table table-striped">
         <tbody>
         <?php foreach ($anuncios as $anuncio): ?>
           <tr>
             <td>
               <?php if (empty($anuncio['url'])): ?>
-              <img height="80" src="assets/images/anuncios/default.jpg" alt="foto-anuncio">
+              <img height="80" class="rounded" src="assets/images/anuncios/default.jpg" alt="foto-anuncio">
               <?php else: ?>
-              <img height="100" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="foto-anuncio">
+              <img height="100" class="rounded" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="foto-anuncio">
               <?php endif; ?>
             </td>
             <td>
@@ -105,6 +107,12 @@ if (isset($_SESSION['user_id'])) {
         <?php endforeach; ?>
         </tbody>
       </table>
+      <?php else: ?>
+      <div style="margin: 80px 0 30px 0;" class="text-center">
+        <h4>Nenhum produto foi encontrado!</h4>
+        <a href="index.php">Voltar à página inicial</a>
+      </div>
+      <?php endif;?>
     </div>
 
   </div>

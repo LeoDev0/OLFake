@@ -105,7 +105,7 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
           <div class="form-group">
             <label for="email">Nova senha:</label>
             <div class="input-group">
-              <input data-password-input id="nova_senha" class="form-control" type="password" name="nova_senha">
+              <input data-password-input id="nova_senha" class="form-control" type="password" name="nova_senha" pattern=".{8,}" title="No mínimo 8 caracteres">
               <div class="input-group-append">
                 <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
               </div>

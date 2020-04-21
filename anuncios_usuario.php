@@ -19,7 +19,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
   <h2 style="margin-bottom:30px;">Página do anunciante</h2>
 
   <div style="margin-bottom: 40px;" class="breadcrumb align-items-center">
-    <img style="width: 18rem; margin:10px 70px 10px 10px;" src="assets/images/profile-pics/<?= $vendedor['foto_perfil'] ?>" alt="profile-pic">
+    <img style="width: 18rem; margin:10px 70px 10px 10px;" class="rounded" src="assets/images/profile-pics/<?= $vendedor['foto_perfil'] ?>" alt="profile-pic">
     <div>
       <h5><?= ucfirst($vendedor['nome']) ?></h5><br>
       <p>Na OLFake desde <?= strftime('%d de %B de %Y', strtotime($vendedor['data_registro'])) ?></p>
@@ -28,6 +28,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     </div>
   </div>
 
+  <?php if ($total_anuncios['total'] > 0): ?>
   <table class="table table-hover">
     <thead class="thead thead-light">
       <tr>
@@ -41,9 +42,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <tr>
       <td>
         <?php if (empty($anuncio['url'])): ?>
-        <img height="80" src="assets/images/anuncios/default.jpg" alt="anuncio">
+        <img height="80" class="rounded" src="assets/images/anuncios/default.jpg" alt="anuncio">
         <?php else: ?>
-        <img height="100" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
+        <img height="100" class="rounded" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
         <?php endif; ?>
       </td>
       <td><?= $anuncio['titulo']; ?></td>
@@ -54,6 +55,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     </tr>
     <?php endforeach; ?>
   </table>
+  <?php else: ?>
+  <h4 class="text-center">Este usuário não possui nenhum produto a venda.</h4>
+  <?php endif; ?>
 
 </div>
 

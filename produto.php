@@ -39,13 +39,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <?php if ($qt_fotos > 0): ?>
           <?php foreach ($anuncio['fotos'] as $chave => $foto): ?>
             <div class="carousel-item <?= ($chave == 0) ? 'active': '' ?>">
-              <img class="d-block w-100" src="assets/images/anuncios/<?= $foto['url'] ?>" alt="slide <?= $chave + 1 ?>">
+              <img class="rounded d-block w-100" src="assets/images/anuncios/<?= $foto['url'] ?>" alt="slide <?= $chave + 1 ?>">
             </div>
           <?php endforeach; ?>
         <!-- ...caso não tenha fotos adicionadas, exibe a imagem padrão. -->
         <?php else: ?>
           <div class="carousel-item active">
-            <img class="d-block w-100" src="assets/images/anuncios/default.jpg" alt="slide">
+            <img class="rounded d-block w-100" src="assets/images/anuncios/default.jpg" alt="slide">
           </div>
         <?php endif; ?>
 

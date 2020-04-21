@@ -31,6 +31,7 @@ $total_anuncios = $a->getTotalMeusAnuncios($id);
   <h1 style="margin-bottom:30px;">Meus Anúncios (<?= $total_anuncios['total'] ?>)</h1>
   <a style="margin-bottom:30px;" class="btn btn-primary" href="add_anuncio.php">Novo anúncio</a>
 
+  <?php if ($total_anuncios['total'] > 0): ?>
   <table class="table table-hover">
     <thead class="thead thead-light">
       <tr>
@@ -48,9 +49,9 @@ $total_anuncios = $a->getTotalMeusAnuncios($id);
     <tr>
       <td>
         <?php if (empty($anuncio['url'])): ?>
-        <img height="80" src="assets/images/anuncios/default.jpg" alt="anuncio">
+        <img height="80" class="rounded" src="assets/images/anuncios/default.jpg" alt="anuncio">
         <?php else: ?>
-        <img height="100" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
+        <img height="100" class="rounded" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
         <?php endif; ?>
       </td>
       <td><?= $anuncio['titulo']; ?></td>
@@ -63,6 +64,9 @@ $total_anuncios = $a->getTotalMeusAnuncios($id);
     <?php endforeach; ?>
 
   </table>
+  <?php else: ?>
+  <h4 class="text-center">Você ainda não possui nenhum anúncio!</h4>
+  <?php endif; ?>
 </div>
 <script src="assets/js/meus_anuncios.js"></script>
 
