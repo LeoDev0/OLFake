@@ -130,7 +130,7 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
 
       <div class="col-lg">
         <div class="text-center">
-          <img style="width: 40vh; height: 40vh; border-radius: 50%; margin: 40px 0;" src="assets/images/profile-pics/<?= $dados['foto_perfil'] ?>">
+          <img class="picture-change rounded-circle" src="assets/images/profile-pics/<?= $dados['foto_perfil'] ?>">
           <form id="profile-photo-form" method="post" enctype="multipart/form-data">
             <input onchange="this.form.submit()" hidden class="submit-profile-photo" type="file" name="submit-photo" accept=".png, .jpg, .jpeg">
           </form>

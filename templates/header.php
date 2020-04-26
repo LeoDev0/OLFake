@@ -65,20 +65,20 @@ $categorias = $cat->getLista();
         </form>
         <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
         <?php $usuario = $user->getDados($_SESSION['user_id']); ?>
-        <a class="nav-item nav-link" href="meus_anuncios.php"><i class="fas fa-bullhorn"></i> Meus anúncios</a>
+        <a class="nav-item nav-link btn btn-shadow" href="meus_anuncios.php"><i class="fas fa-bullhorn" style="margin-right:3px;"></i> Meus anúncios</a>
         <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img style="border-radius: 24px;" src="assets/images/profile-pics/<?= $usuario['foto_perfil'] ?>" height="30px" width="30px" alt="profile pic">
+          <a class="nav-link dropdown-toggle btn btn-shadow" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="rounded-circle" src="assets/images/profile-pics/<?= $usuario['foto_perfil'] ?>" height="30px" width="30px" alt="profile pic">
             <span><?= ucfirst($usuario['nome']) ?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="settings.php">Configurações</a>
-            <a class="dropdown-item" href="logout.php">Sair</a>
+            <a class="dropdown-item btn btn-shadow" href="settings.php">Configurações</a>
+            <a class="dropdown-item btn btn-shadow" href="logout.php">Sair</a>
           </div>
         </div>
         <?php else: ?>
-        <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#login-window"><i class="far fa-user-circle"></i> Login</a>
-        <a href="" class="nav-item nav-link" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
+        <a href="" class="nav-item nav-link btn btn-shadow" data-toggle="modal" data-target="#login-window"><i class="far fa-user-circle" style="margin-right:2px;"></i> Login</a>
+        <a href="" class="nav-item nav-link btn btn-orange shadow-sm" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
         <?php endif; ?>
       </div>
     </div>
@@ -93,6 +93,9 @@ $categorias = $cat->getLista();
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>
           <div class="modal-body">
+            <div class="text-center">
+              <img height="70px" src="assets/images/logo.png" alt="logo">
+            </div>
             <?php 
               if (isset($_POST['email']) && !empty($_POST['email'])) {
                 $email = $_POST['email'];
@@ -101,7 +104,6 @@ $categorias = $cat->getLista();
                 if ($user->fazerLogin($email, $senha)) {
                   header('Location: index.php');
                 } else {
-                  // echo '<div class="alert alert-danger">Usuário ou senha incorretos.</div>';
                   echo '<script language="javascript">';
                   echo 'alert("Usuário ou senha incorretos.")';
                   echo '</script>';
@@ -153,6 +155,9 @@ $categorias = $cat->getLista();
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>
           <div class="modal-body">
+            <div class="text-center">
+              <img height="70px" src="assets/images/logo.png" alt="logo">
+            </div>
             <?php
               if (isset($_POST['nome']) && !empty($_POST['nome'])) {
                 $nome = trim($_POST['nome']);

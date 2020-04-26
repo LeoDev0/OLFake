@@ -42,9 +42,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <tr>
       <td>
         <?php if (empty($anuncio['url'])): ?>
-        <img height="80" class="rounded" src="assets/images/anuncios/default.jpg" alt="anuncio">
+        <a href="produto.php?id=<?= $anuncio['id'] ?>">
+          <img height="80" class="rounded zoomin" src="assets/images/anuncios/default.jpg" alt="anuncio">
+        </a>
         <?php else: ?>
-        <img height="100" class="rounded" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
+        <a href="produto.php?id=<?= $anuncio['id'] ?>">
+          <img height="100" class="rounded zoomin" src="assets/images/anuncios/<?= $anuncio['url'] ?>" alt="anuncio">
+        </a>
         <?php endif; ?>
       </td>
       <td><?= $anuncio['titulo']; ?></td>

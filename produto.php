@@ -39,7 +39,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <?php if ($qt_fotos > 0): ?>
           <?php foreach ($anuncio['fotos'] as $chave => $foto): ?>
             <div class="carousel-item <?= ($chave == 0) ? 'active': '' ?>">
-              <img class="rounded d-block w-100" src="assets/images/anuncios/<?= $foto['url'] ?>" alt="slide <?= $chave + 1 ?>">
+              <img data-zoom class="rounded d-block w-100" src="assets/images/anuncios/<?= $foto['url'] ?>" alt="slide <?= $chave + 1 ?>">
             </div>
           <?php endforeach; ?>
         <!-- ...caso não tenha fotos adicionadas, exibe a imagem padrão. -->
@@ -62,20 +62,19 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     </div>
     <div class="col-sm-7">
-      <h1><?= $anuncio['titulo'] ?></h1>
-      <h4>Categoria: <?= $anuncio['categoria'] ?></h4>
+      <h1 style="margin-bottom:20px;"><?= $anuncio['titulo'] ?></h1>
+      <h4><span style="color:#675e5a;">Categoria:</span> <?= $anuncio['categoria'] ?></h4>
 
       <?php if ($anuncio['estado'] == 0): ?>
-      <h4>Estado de conservação: Ruim</h4>
+      <h4><span style="color:#675e5a;">Estado de conservação:</span> Ruim</h4>
       <?php elseif ($anuncio['estado'] == 1): ?>
-      <h4>Estado de conservação: Bom</h4>
+      <h4><span style="color:#675e5a;">Estado de conservação:</span> Bom</h4>
       <?php elseif ($anuncio['estado'] == 2): ?>
-      <h4>Estado de conservação: Ótimo</h4>
+      <h4><span style="color:#675e5a;">Estado de conservação:</span> Ótimo</h4>
       <?php endif; ?>
       
-      <p><?= $anuncio['descricao'] ?></p>
+      <p class="<?= !empty($anuncio['descricao']) ? 'breadcrumb': '' ?>"><?= $anuncio['descricao'] ?></p>
       <p>Vendedor: <a href="anuncios_usuario.php?id=<?= $id_usuario?>"><?= ucfirst($vendedor['nome']) ?></a></p>
-      <br>
       <h3>R$ <?= number_format($anuncio['valor'], 2, ',', '.') ?></h3>
       <br>
       <button 
