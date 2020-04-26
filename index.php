@@ -49,7 +49,7 @@ if (isset($_SESSION['user_id'])) {
           </div>
         </div>
       </div>
-    </div> grid com as fotos dentro do jumbotron, e adicionar data do último login -->
+    </div> grid com as fotos dentro do jumbotron -->
 
   <div style="margin-top:20px;" class="jumbotron">
 

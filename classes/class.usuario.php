@@ -26,6 +26,14 @@ class Usuario {
     if ($sql->rowCount() > 0) {
       $dados = $sql->fetch();
       $_SESSION['user_id'] = $dados['id'];
+
+      // Cada vez que um login é feito com sucesso, o campo "data_login" é atualizado
+      $data_atual = date('Y-m-d');
+      $sql2 = $this->pdo->prepare("UPDATE usuarios SET data_login = :data_login WHERE id = :id");
+      $sql2->bindValue(":data_login", $data_atual);
+      $sql2->bindValue(":id", $dados['id']);
+      $sql2->execute();
+
       return true;
     } else {
       return false;
@@ -45,12 +53,13 @@ class Usuario {
     if ($sql->rowCount() == 0) {
       $data_atual = date('Y-m-d');
       
-      $sql = "INSERT INTO usuarios (nome, email, senha, data_registro) VALUES (:nome, :email, :senha, :data_registro)";
+      $sql = "INSERT INTO usuarios (nome, email, senha, data_registro, data_login) VALUES (:nome, :email, :senha, :data_registro, :data_login)";
       $sql = $this->pdo->prepare($sql);
       $sql->bindValue(":nome", $nome);
       $sql->bindValue(":email", $email);
       $sql->bindValue(":senha", $senha);
       $sql->bindValue(":data_registro", $data_atual);
+      $sql->bindValue(":data_login", $data_atual);
       $sql->execute();
 
       // faz login automático na conta após criá-la
@@ -60,6 +69,14 @@ class Usuario {
     } else {
       return false;
     }
+  }
+
+  // Vai retornar o número de dias entre a data atual e a data do último login 
+  public function getIntervaloUltimoLogin($data_login) {
+    $data_login = new DateTime($data_login);
+    $data_atual = new DateTime(date("Y-m-d"));
+    $intervalo = $data_login->diff($data_atual);
+    return $intervalo->format('%a');
   }
 
   public function getDados($id) {

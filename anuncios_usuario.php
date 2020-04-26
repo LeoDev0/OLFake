@@ -1,17 +1,28 @@
 <?php 
+ob_start();
 require 'templates/header.php';
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
   $id_vendedor = $_GET['id'];
-
-  $a = new Anuncios($pdo);
-  $anuncios = $a->getMeusAnuncios($id_vendedor);
-  $total_anuncios = $a->getTotalMeusAnuncios($id_vendedor);
-
   $user = new Usuario($pdo);
   $vendedor = $user->getDados($id_vendedor);
+
+  // Se o id enviado como parâmetro não retornar dados de usuário ($vendededor == false) quando passado 
+  // pelo método getDados(), significa que esse é um id inexistente e a página será redirecionada
+  if ($vendedor == true) {
+    $intervalo = $user->getIntervaloUltimoLogin($vendedor['data_login']);
+
+    $a = new Anuncios($pdo);
+    $anuncios = $a->getMeusAnuncios($id_vendedor);
+    $total_anuncios = $a->getTotalMeusAnuncios($id_vendedor);
+  } else {
+    header('Location: index.php');
+    exit;
+  }
+
 } else {
   header('Location: index.php');
+  exit;
 }
 ?>
 
@@ -22,7 +33,24 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <img style="width: 18rem; margin:10px 70px 10px 10px;" class="rounded" src="assets/images/profile-pics/<?= $vendedor['foto_perfil'] ?>" alt="profile-pic">
     <div>
       <h5><?= ucfirst($vendedor['nome']) ?></h5><br>
-      <p>Na OLFake desde <?= strftime('%d de %B de %Y', strtotime($vendedor['data_registro'])) ?></p>
+      <p>Na OLFake desde <?= strftime('%d de %B de %Y', strtotime($vendedor['data_registro'])) ?>.</p>
+      <p>
+      <?php
+        switch ($intervalo) {
+          case '0':
+            echo 'Visto pela última vez hoje.';
+            break;
+          
+          case '1':
+            echo 'Visto pela última vez ontem.';
+            break;
+
+          default:
+            echo "Visto pela última vez há $intervalo dias.";
+            break;
+        }
+      ?>
+      </p>
       <p>Contato: <a href="mailto:<?= $vendedor['email'] ?>"><?= $vendedor['email'] ?></a></p>
       <p>Total de anúncios: <strong><?= $total_anuncios['total'] ?></strong></p>
     </div>
@@ -67,4 +95,5 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 <?php
 require 'templates/footer.php';
+ob_end_flush();
 ?>

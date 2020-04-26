@@ -25,7 +25,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 <div class="container-fluid" style="margin-top: 50px;">
   <div class="row" style="margin:20px 0;">
-    <div class="col-sm-5">
+    <div class="col-sm-5 img-thumbnail" style="padding:5px">
 
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
