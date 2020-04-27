@@ -44,7 +44,7 @@ $categorias = $cat->getLista();
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-sm shadow navbar-light" style="background-color: #ffc107">
+  <nav class="navbar navbar-expand-sm shadow navbar-light bg-warning">
     <a href="index.php">
       <img height="40px" src="assets/images/logo.png" alt="logo" title="OLFake">
     </a>
@@ -65,7 +65,7 @@ $categorias = $cat->getLista();
         </form>
         <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
         <?php $usuario = $user->getDados($_SESSION['user_id']); ?>
-        <a class="nav-item nav-link btn btn-shadow" href="meus_anuncios.php"><i class="fas fa-bullhorn" style="margin-right:3px;"></i> Meus anúncios</a>
+        <a class="nav-item nav-link btn btn-shadow" href="meus_anuncios.php"><i class="fas fa-bullhorn mr-1"></i> Meus anúncios</a>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle btn btn-shadow" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="rounded-circle" src="assets/images/profile-pics/<?= $usuario['foto_perfil'] ?>" height="30px" width="30px" alt="profile pic">
@@ -77,7 +77,7 @@ $categorias = $cat->getLista();
           </div>
         </div>
         <?php else: ?>
-        <a href="" class="nav-item nav-link btn btn-shadow" data-toggle="modal" data-target="#login-window"><i class="far fa-user-circle" style="margin-right:2px;"></i> Login</a>
+        <a href="" class="nav-item nav-link btn btn-shadow" data-toggle="modal" data-target="#login-window"><i class="far fa-user-circle mr-1"></i> Login</a>
         <a href="" class="nav-item nav-link btn btn-orange shadow-sm" data-toggle="modal" data-target="#signup-window">Cadastre-se</a>
         <?php endif; ?>
       </div>
@@ -88,7 +88,7 @@ $categorias = $cat->getLista();
 
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header" style="background-color: #ffc107">
+          <div class="modal-header bg-warning" >
             <h5 class="modal-title">Faça login na sua conta.</h5>
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>
@@ -130,12 +130,12 @@ $categorias = $cat->getLista();
                   </div>
                   <input data-password-input class="form-control" type="password" name="senha" required>
                   <div class="input-group-append">
-                    <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                    <a class="btn btn-link show-hide-pass"><i data-icon-change class="fas fa-eye text-secondary"></i></a>
                   </div>
                 </div>
               </div>
 
-              <button style="margin-top:40px;" class="btn btn-primary btn-block btn-lg">Entrar</button>
+              <button class="btn btn-primary btn-block btn-lg mt-5">Entrar</button>
 
             </form>
           </div>
@@ -150,7 +150,7 @@ $categorias = $cat->getLista();
     <div class="modal fade" id="signup-window">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header" style="background-color: #ffc107">
+          <div class="modal-header bg-warning">
             <h5 class="modal-title">Cadastre-se para anunciar ou comprar já!</h5>
             <button class="close" data-dismiss="modal"><span>&times;</span></button>
           </div>
@@ -231,12 +231,12 @@ $categorias = $cat->getLista();
                   </div>
                   <input data-password-input class="form-control" type="password" name="senhaCadastro" pattern=".{8,}" required title="No mínimo 8 caracteres">
                   <div class="input-group-append">
-                    <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                    <a class="btn btn-link show-hide-pass"><i data-icon-change class="fas fa-eye text-secondary"></i></a>
                   </div>
                 </div>
               </div>
 
-              <button style="margin-top:40px;" class="btn btn-primary btn-block btn-lg">Cadastrar</button>
+              <button class="btn btn-primary btn-block btn-lg mt-5">Cadastrar</button>
 
             </form>
           </div>

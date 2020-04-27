@@ -23,9 +23,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 }
 ?>
 
-<div class="container-fluid" style="margin-top: 50px;">
+<div class="container-fluid mt-50">
   <div class="row" style="margin:20px 0;">
-    <div class="col-sm-5 img-thumbnail" style="padding:5px">
+    <div class="col-sm-5 img-thumbnail p-1">
 
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -92,14 +92,14 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <div class="modal-header" style="background-color: #ffc107">
+      <div class="modal-header bg-warning">
         <h5 class="modal-title">Comprar <?= $anuncio['titulo'] ?></h5>
         <button class="close" data-dismiss="modal"><span>&times;</span></button>
       </div>
       <div class="modal-body">
         <div class="cont">
           <div class="confirmation-message text-center d-none">
-            <h2 style="margin-top:60px;">🎉 Oferta enviada ao vendedor! 🎉</h2><br>
+            <h2 class="mt-50">🎉 Oferta enviada ao vendedor! 🎉</h2><br>
             <h5>Agora o jeito é esperar...</h5>
           </div>
 

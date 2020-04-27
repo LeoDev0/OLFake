@@ -26,13 +26,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 }
 ?>
 
-<div class="container" style="margin-top:50px;">
-  <h2 style="margin-bottom:30px;">Página do anunciante</h2>
+<div class="container mt-50">
+  <h2 class="mb-4">Página do anunciante</h2>
 
-  <div style="margin-bottom: 40px;" class="breadcrumb align-items-center">
+  <div class="breadcrumb align-items-center mb-5">
     <img style="width: 18rem; margin:10px 70px 10px 10px;" class="rounded" src="assets/images/profile-pics/<?= $vendedor['foto_perfil'] ?>" alt="profile-pic">
     <div>
-      <h5><?= ucfirst($vendedor['nome']) ?></h5><br>
+      <h5 class="mb-4"><?= ucfirst($vendedor['nome']) ?></h5>
       <p>Na OLFake desde <?= strftime('%d de %B de %Y', strtotime($vendedor['data_registro'])) ?>.</p>
       <p>
       <?php
@@ -57,6 +57,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
   </div>
 
   <?php if ($total_anuncios['total'] > 0): ?>
+  <h5 class="text-center mb-3">Anúncios de <?= ucfirst($vendedor['nome']) ?> (<?= $total_anuncios['total'] ?>)  </h5>
   <table class="table table-hover">
     <thead class="thead thead-light">
       <tr>
@@ -88,7 +89,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <?php endforeach; ?>
   </table>
   <?php else: ?>
-  <h4 class="text-center">Este usuário não possui nenhum produto a venda.</h4>
+  <h4 class="text-center"><?= ucfirst($vendedor['nome']) ?> não possui nenhum produto à venda.</h4>
   <?php endif; ?>
 
 </div>

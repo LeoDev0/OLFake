@@ -5,8 +5,8 @@ $usuarios = new Usuario($pdo);
 $allUsers = $usuarios->getDadosAll();
 ?>
 
-<div class="container" style="margin-top:50px;">
-  <h1 style="margin-bottom:20px;">Ranking de vendedores</h1>
+<div class="container mt-50">
+  <h1 class="mb-4">Ranking de vendedores</h1>
 
   <table class="table table-hover">
     <thead class="thead thead-light">

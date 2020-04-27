@@ -34,19 +34,19 @@ if (isset($_POST['titulo']) && !empty(trim($_POST['titulo']))) {
 }
 ?>
 
-<div class="container" style="margin-top:50px;">
-  <h1 style="margin-bottom:30px;">Editar Anúncio</h1>
+<div class="container mt-50">
+  <h1 class="mb-5">Editar Anúncio</h1>
 
-  <form style="margin-bottom: 20px;" method="post" enctype="multipart/form-data">
+  <form class="mb-4" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="titulo">Título do anúncio <span style="color:red; font-weight:600;">*</span></label>
+      <label for="titulo">Título do anúncio <span class="text-danger"><strong>*</strong></span></label>
       <input class="form-control" type="text" name="titulo" value="<?= $info['titulo'] ?>" required>
     </div>
 
     <div class="row">
       <div class="col-lg-4">
         <div class="form-group">
-          <label for="valor">Valor <span style="color:red; font-weight:600;">*</span></label>
+          <label for="valor">Valor <span class="text-danger"><strong>*</strong></span></label>
           <input class="form-control" type="number" name="valor" value="<?= $info['valor'] ?>" min='0' required>
         </div>
       </div>
@@ -90,7 +90,7 @@ if (isset($_POST['titulo']) && !empty(trim($_POST['titulo']))) {
     </div>
 
     <div class="form-group">
-      <div style="margin-bottom:20px;">
+      <div class="mb-4">
         <label for="fotos[]">Adicionar fotos</label><br>
         <input class="breadcrumb" style="width:100%;" type="file" name="fotos[]" multiple accept=".png, .jpg, .jpeg">
       </div>

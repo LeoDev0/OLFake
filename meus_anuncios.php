@@ -27,9 +27,9 @@ $a = new Anuncios($pdo);
 $total_anuncios = $a->getTotalMeusAnuncios($id);
 ?>
 
-<div class="container" style="margin-top:50px;">
-  <h1 style="margin-bottom:30px;">Meus Anúncios (<?= $total_anuncios['total'] ?>)</h1>
-  <a style="margin-bottom:30px;" class="btn btn-primary" href="add_anuncio.php">Novo anúncio</a>
+<div class="container mt-50">
+  <h1 class="mb-5">Meus Anúncios (<?= $total_anuncios['total'] ?>)</h1>
+  <a class="btn btn-primary mb-4" href="add_anuncio.php">Novo anúncio</a>
 
   <?php if ($total_anuncios['total'] > 0): ?>
   <table class="table table-hover">

@@ -68,14 +68,14 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
 }
 ?>
 
-<div style="margin-top: 50px;" class="container">
-  <h2 style="margin-bottom: 20px;">Meu perfil</h2>
+<div class="container mt-50">
+  <h2 class="mb-4">Meu perfil</h2>
   <div class="jumbotron">
 
     <div class="row">
 
       <div class="col-lg">
-        <h3 style="margin-bottom: 20px;" class="text-center" >Alterar meus dados</h3>
+        <h3 class="text-center mb-4" >Alterar meus dados</h3>
 
         <form id="dados_form" method="post">
           <div class="form-group">
@@ -97,7 +97,7 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
             <div class="input-group">
               <input data-password-input class="form-control" type="password" name="senha_antiga">
               <div class="input-group-append">
-                <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                <a class="btn btn-link show-hide-pass"><i data-icon-change class="fas fa-eye text-secondary"></i></a>
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
             <div class="input-group">
               <input data-password-input id="nova_senha" class="form-control" type="password" name="nova_senha" pattern=".{8,}" title="No mínimo 8 caracteres">
               <div class="input-group-append">
-                <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                <a class="btn btn-link show-hide-pass"><i data-icon-change class="fas fa-eye text-secondary"></i></a>
               </div>
             </div>
           </div>
@@ -117,13 +117,13 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
             <div class="input-group">
               <input data-password-input id="confirma_senha" class="form-control" type="password">
               <div class="input-group-append">
-                <a class="btn btn-link show-hide-pass"><i style="color:grey" data-icon-change class="fas fa-eye"></i></a>
+                <a class="btn btn-link show-hide-pass"><i data-icon-change class="fas fa-eye text-secondary"></i></a>
               </div>
             </div>
           </div>
 
           <div class="text-center">
-            <button style="margin-top:20px;" class="btn btn-primary" >Salvar Alterações</button>
+            <button class="btn btn-primary mt-4" >Salvar Alterações</button>
           </div>
         </form>
       </div>
