@@ -8,7 +8,7 @@ $allUsers = $usuarios->getDadosAll();
 <div class="container mt-50">
   <h1 class="mb-4">Ranking de vendedores</h1>
 
-  <table class="table table-hover">
+  <table class="table table-hover shadow">
     <thead class="thead thead-light">
       <tr>
         <th>Posição no ranking</th>

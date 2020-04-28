@@ -4,6 +4,21 @@
   box-shadow: 0px 3px 44px -11px rgba(0, 0, 0, 0.77);
 }
 
+.bg-art {
+  background-image: url("../images/bg1.jpg");
+  background-size: cover;
+}
+
+.text-shadow {
+  text-shadow: 4px 4px 2px rgb(0, 0, 0);
+}
+
+.text-shadow a {
+  -webkit-text-decoration-color: yellow;
+  text-decoration-color: yellow;
+  color: yellow;
+}
+
 .mt-50 {
   margin-top: 50px;
 }

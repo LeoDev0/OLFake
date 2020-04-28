@@ -29,7 +29,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 <div class="container mt-50">
   <h2 class="mb-4">Página do anunciante</h2>
 
-  <div class="breadcrumb align-items-center mb-5">
+  <div class="breadcrumb align-items-center mb-5 shadow">
     <img style="width: 18rem; margin:10px 70px 10px 10px;" class="rounded" src="assets/images/profile-pics/<?= $vendedor['foto_perfil'] ?>" alt="profile-pic">
     <div>
       <h5 class="mb-4"><?= ucfirst($vendedor['nome']) ?></h5>
@@ -58,7 +58,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
   <?php if ($total_anuncios['total'] > 0): ?>
   <h5 class="text-center mb-3">Anúncios de <?= ucfirst($vendedor['nome']) ?> (<?= $total_anuncios['total'] ?>)  </h5>
-  <table class="table table-hover">
+  <table class="table table-hover shadow">
     <thead class="thead thead-light">
       <tr>
         <th>Foto</th>

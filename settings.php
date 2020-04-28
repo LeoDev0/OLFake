@@ -70,7 +70,7 @@ if (isset($_POST['senha_deletar']) && !empty($_POST['senha_deletar'])) {
 
 <div class="container mt-50">
   <h2 class="mb-4">Meu perfil</h2>
-  <div class="jumbotron">
+  <div class="jumbotron shadow">
 
     <div class="row">
 

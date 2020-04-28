@@ -32,7 +32,7 @@ $total_anuncios = $a->getTotalMeusAnuncios($id);
   <a class="btn btn-primary mb-4" href="add_anuncio.php">Novo anúncio</a>
 
   <?php if ($total_anuncios['total'] > 0): ?>
-  <table class="table table-hover">
+  <table class="table table-hover shadow">
     <thead class="thead thead-light">
       <tr>
         <th>Foto</th>
