@@ -5,7 +5,7 @@ $dbuser = "root";
 $dbpass = "";
 $dbname = "classificados";
 $host = "localhost";
-$dsn = "mysql:dbname=$dbname;host=$host";
+$dsn = "mysql:dbname=$dbname;host=$host;charset=utf8";
 $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
 try {
