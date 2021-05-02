@@ -1,6 +1,6 @@
 # OLFake
 
-Loja virtual fictícia inspirada na OLX. Projeto feito durante os estudos de backend com PHP e manipulação de banco de dados SQL. Frontend feito com Bootstrap. Você pode visitar o site [clicando aqui](https://leofernandes.educationhost.cloud/)
+Loja virtual fictícia inspirada na OLX. Projeto feito durante os estudos de backend com PHP e manipulação de banco de dados SQL. Frontend feito com Bootstrap.
 
 As operações de CRUD permitem ao usuário criar uma conta, e com essa conta criar/editar/apagar anúncios, visualizar e comprar produtos de outros anunciantes, trocar senha/nome de usuário/foto de perfil e apagar conta.
 
